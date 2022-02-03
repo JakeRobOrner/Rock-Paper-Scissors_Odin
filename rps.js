@@ -10,9 +10,6 @@ function computerPlay() {
     }
     return 'scissors';
 }
-const computerSelection = computerPlay();
-// Request selection from player
-const playerSelection = prompt("Please enter rock, paper, or scissors: ", "rock").toLowerCase();
 
 // Compare player and computer selections to determine winner
 function playRound(playerSelection, computerSelection) {
@@ -44,4 +41,47 @@ function playRound(playerSelection, computerSelection) {
         return 'win';
     }
 }
-console.log(playRound(playerSelection, computerSelection));
+
+let win = 0;
+let lose = 0;
+
+// Play five rounds
+function game() {
+    
+    for (let i = 0; i < 5; i++) {
+        const computerSelection = computerPlay();
+        // Request selection from player
+        const playerSelection = prompt("Please enter rock, paper, or scissors: ", "rock").toLowerCase();
+
+        const play = playRound(playerSelection, computerSelection);
+
+        if (play == 'draw') {
+            console.log("Draw!");
+        }
+        else if (play == 'lose') {
+            console.log("Lose!");
+            lose++;
+        }
+        else if (play == 'win') {
+            console.log("Win!");
+            win++;
+        }
+    }
+    return [win, lose];
+}
+
+let winLose = game();
+whoWon(winLose[0], winLose[1]);
+
+function whoWon(wins, losses) {
+        // Determine final winner of five rounds
+        if (wins > losses) {
+            alert("Congratulations! You are the winner!");
+        }
+        else if (wins < losses) {
+            alert("Sorry, you lose.");
+        }
+        else if (wins == losses) {
+            alert("It's a draw!")
+        }
+}
